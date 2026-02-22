@@ -18,6 +18,11 @@ BondTrade* BondTradeLoader::createTradeFromLine(std::string line) {
     if (items.size() < 7) {
         throw std::runtime_error("Invalid line format");
     }
+
+    // Remove an invisible character from TradeID at the end of the line that was being included
+    if (!items[6].empty()) {
+        items[6].pop_back();
+    }
     
     BondTrade* trade = new BondTrade(items[6], items[0]);
     
